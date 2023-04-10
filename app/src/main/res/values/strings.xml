@@ -2,5 +2,10 @@
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
     <string name="show_notification">Show Notification</string>
+    <string name="show_notification_2">Show Notification 2</string>
+    <string name="show_notification_image">Show Notification Image</string>
+    <string name="show_notification_image_2">Show Notification Image 2</string>
+    <string name="show_notification_long">Show Notification Long</string>
+    <string name="show_notification_long_2">Show Notification Long 2</string>
     <string name="hello_there">Hello There!</string>
 </resources>
