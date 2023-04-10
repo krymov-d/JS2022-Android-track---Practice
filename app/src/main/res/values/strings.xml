@@ -7,5 +7,7 @@
     <string name="show_notification_image_2">Show Notification Image 2</string>
     <string name="show_notification_long">Show Notification Long</string>
     <string name="show_notification_long_2">Show Notification Long 2</string>
+    <string name="show_notification_updatable">Show Notification Updatable</string>
+    <string name="show_notification_stack">Show Notification Stack</string>
     <string name="hello_there">Hello There!</string>
 </resources>

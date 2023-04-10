@@ -30,6 +30,7 @@
                 android:value="" />
         </activity>
         <activity android:name="kz.kd.practice.NotificationActivity" />
+        <activity android:name="kz.kd.practice.ProxyActivity" />
 
         <receiver android:name="kz.kd.practice.CustomActionBroadCastReceiver" />
     </application>

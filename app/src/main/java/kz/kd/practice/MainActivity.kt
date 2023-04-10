@@ -3,7 +3,7 @@ package kz.kd.practice
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.*
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -54,6 +54,16 @@ class MainActivity : AppCompatActivity() {
             showNotificationWithLinedText()
         }
 
+        val btnShow7: Button = findViewById(R.id.btn_show_notification_updatable)
+        btnShow7.setOnClickListener {
+            showNotificationWithUpdatableText()
+        }
+
+        val btnShow8: Button = findViewById(R.id.btn_show_notification_stack)
+        btnShow8.setOnClickListener {
+            showNotificationWithCustomStack()
+        }
+
         createNotificationChannel()
     }
 
@@ -62,11 +72,11 @@ class MainActivity : AppCompatActivity() {
 //        val intent = Intent(this, NotificationActivity::class.java).apply {
 //            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 //        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+        val pendingIntent: PendingIntent = getActivity(
             this,
             0,
             intent,
-            PendingIntent.FLAG_ONE_SHOT or FLAG_IMMUTABLE
+            FLAG_ONE_SHOT or FLAG_IMMUTABLE
         )
 
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -87,11 +97,11 @@ class MainActivity : AppCompatActivity() {
             putExtra(EXTRA_NOTIFICATION_ID, notificationID)
         }
 
-        val customActionPendingIntent: PendingIntent = PendingIntent.getBroadcast(
+        val customActionPendingIntent: PendingIntent = getBroadcast(
             this,
             0,
             customActionIntent,
-            PendingIntent.FLAG_ONE_SHOT or FLAG_IMMUTABLE
+            FLAG_ONE_SHOT or FLAG_IMMUTABLE
         )
 
         val builder: NotificationCompat.Builder = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -147,6 +157,51 @@ class MainActivity : AppCompatActivity() {
         )
 
         NotificationManagerCompat.from(this).notify(Int.MIN_VALUE, builder.build())
+    }
+
+    private fun showNotificationWithUpdatableText() {
+        val constNotificationId = 5
+        val builder: NotificationCompat.Builder = getCommonNotificationBuilder()
+        builder.setContentText(getRandomText())
+        builder.setOnlyAlertOnce(true)
+        NotificationManagerCompat.from(this).notify(constNotificationId, builder.build())
+    }
+
+    private fun showNotificationWithCustomStack() {
+        val builder: NotificationCompat.Builder = getCommonNotificationBuilder()
+
+        val proxyActivityIntent = Intent(this, ProxyActivity::class.java)
+        val resultActivityIntent = Intent(this, NotificationActivity::class.java)
+
+        val pendingIntent = getActivities(
+            this,
+            0,
+            arrayOf(
+                proxyActivityIntent,
+                resultActivityIntent
+            ), FLAG_ONE_SHOT or FLAG_IMMUTABLE
+        )
+
+//        val pendingIntent = TaskStackBuilder.create(this).apply {
+//            addNextIntent(proxyActivityIntent)
+//            addNextIntent(resultActivityIntent)
+//        }.getPendingIntent(0, FLAG_ONE_SHOT)
+
+        builder.setContentIntent(pendingIntent)
+
+        NotificationManagerCompat.from(this).notify(Int.MIN_VALUE, builder.build())
+    }
+
+    private fun getRandomText(): String {
+        val generator = Random
+        val randomStringBuilder = StringBuilder()
+        val randomLength = generator.nextInt(36)
+        var tempChar: Char
+        for (i in 0 until randomLength) {
+            tempChar = (generator.nextInt(96) + 32).toChar()
+            randomStringBuilder.append(tempChar)
+        }
+        return randomStringBuilder.toString()
     }
 
     private fun createNotificationChannel() {
