@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_show_notification"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_notification"
+        android:text="@string/hello_there"
+        android:textColor="@color/black"
+        android:textSize="@dimen/tv_size_25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
