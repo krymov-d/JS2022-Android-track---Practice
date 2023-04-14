@@ -35,6 +35,17 @@ class MainActivity : AppCompatActivity() {
 //                        }
 //                    }
 //                }
+
+//            val constraints = Constraints.Builder()
+//                .setRequiredNetworkType(NetworkType.UNMETERED)
+//                .setRequiresCharging(true)
+//                .build()
+//
+//            val myWorkRequest: WorkRequest =
+//                OneTimeWorkRequestBuilder<MyWork>()
+//                    .setConstraints(constraints)
+//                    .build()
+
             val myUploadWork = OneTimeWorkRequestBuilder<UploadWork>()
                 .setInputData(
                     workDataOf(
