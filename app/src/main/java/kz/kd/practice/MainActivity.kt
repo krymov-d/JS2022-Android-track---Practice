@@ -46,6 +46,22 @@ class MainActivity : AppCompatActivity() {
 //                    .setConstraints(constraints)
 //                    .build()
 
+//            val continuation = WorkManager.getInstance(context)
+//                .beginUniqueWork(
+//                    Constants.IMAGE_MANIPULATION_WORK_NAME,
+//                    ExistingWorkPolicy.REPLACE,
+//                    OneTimeWorkRequest.from(CleanupWorker::class.java)
+//                ).then(OneTimeWorkRequest.from(WaterColorFilterWorker::class.java))
+//                .then(OneTimeWorkRequest.from(GrayScaleFilterWorker::class.java))
+//                .then(OneTimeWorkRequest.from(BlurEffectFilterWorker::class.java))
+//                .then(
+//                    if (save) {
+//                        workRequest<SaveImageToGalleryWorker>(tag = Constants.TAG_OUTPUT)
+//                    } else /* upload */ {
+//                        workRequest<UploadWorker>(tag = Constants.TAG_OUTPUT)
+//                    }
+//                )
+
             val myUploadWork = OneTimeWorkRequestBuilder<UploadWork>()
                 .setInputData(
                     workDataOf(
