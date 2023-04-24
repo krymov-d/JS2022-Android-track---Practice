@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
+    <string name="_1">+1</string>
+    <string name="result">Результат</string>
+    <string name="result_title">Ваш результат: %1$d</string>
 </resources>
