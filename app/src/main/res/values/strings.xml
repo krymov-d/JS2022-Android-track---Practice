@@ -5,4 +5,5 @@
     <string name="result">Результат</string>
     <string name="result_title">Ваш результат: %1$d</string>
     <string name="reset">Cбросить</string>
+    <string name="implicit">Неявные интенты</string>
 </resources>

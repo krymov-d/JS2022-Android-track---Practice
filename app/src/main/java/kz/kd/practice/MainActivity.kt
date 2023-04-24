@@ -2,6 +2,7 @@ package kz.kd.practice
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -66,6 +67,14 @@ class MainActivity : AppCompatActivity() {
                 resultActivityResult.launch(this)
             }
         }
+
+        val implicitIntent: Button = findViewById(R.id.implicitButton)
+        implicitIntent.setOnClickListener {
+            val address = Uri.parse("http://google.com")
+            val openLinkIntent = Intent(Intent.ACTION_VIEW, address)
+            startActivity(openLinkIntent)
+        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
