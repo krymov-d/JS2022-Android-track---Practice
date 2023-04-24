@@ -3,4 +3,8 @@
     <string name="app_name_custom">Practice App</string>
     <string name="hello_fragment">Hello Fragment</string>
     <string name="open">Открыть первый фрагмент</string>
+    <string name="fragment2">Fragment2</string>
+    <string name="add">add</string>
+    <string name="replace">replace</string>
+    <string name="addtobackstack">addToBackStack</string>
 </resources>
