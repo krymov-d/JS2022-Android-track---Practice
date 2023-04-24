@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
+    <string name="hello_fragment">Hello Fragment</string>
+    <string name="open">Открыть первый фрагмент</string>
 </resources>
