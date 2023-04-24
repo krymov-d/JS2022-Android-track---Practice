@@ -24,6 +24,12 @@
         android:layout_height="wrap_content"
         android:text="@string/addtobackstack" />
 
+    <Button
+        android:id="@+id/resetCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reset" />
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"

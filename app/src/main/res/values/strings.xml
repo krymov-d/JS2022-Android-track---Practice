@@ -7,4 +7,8 @@
     <string name="add">add</string>
     <string name="replace">replace</string>
     <string name="addtobackstack">addToBackStack</string>
+    <string name="_1">+1</string>
+    <string name="_0">0</string>
+    <string name="show_result">Show result</string>
+    <string name="reset">Reset</string>
 </resources>

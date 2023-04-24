@@ -6,11 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 private const val TAG = "FragmentLife"
 
 class MainFragment : Fragment(R.layout.fragment_main) {
+    private var counter = 0
+    private lateinit var textView: TextView
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Log.d(TAG, "MainFragment onAttach")
@@ -33,6 +38,28 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "MainFragment onViewCreated")
+
+
+        val button = view.findViewById<Button>(R.id.button)
+        textView = view.findViewById(R.id.textView)
+
+        button.setOnClickListener {
+            counter++
+            textView.text = counter.toString()
+        }
+
+        val resultButton = view.findViewById<Button>(R.id.result)
+        resultButton.setOnClickListener {
+            parentFragmentManager
+                .beginTransaction()
+                .add(
+                    R.id.fragmentContainer,
+                    SecondFragment.newInstance(counter),
+                    "MainFragment2"
+                )
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onPause() {
@@ -58,5 +85,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onDetach() {
         super.onDetach()
         Log.d(TAG, "MainFragment onDetach")
+    }
+
+    fun resetCounter() {
+        counter = 0
+        textView.text = counter.toString()
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +34,13 @@ class MainActivity : AppCompatActivity() {
             if (addToBackStack) transaction.addToBackStack(null)
 
             transaction.commit()
+        }
+
+        findViewById<Button>(R.id.resetCounter).setOnClickListener {
+            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.fragmentContainer)
+            if(fragment is MainFragment) {
+                fragment.resetCounter()
+            }
         }
     }
 }
