@@ -1,17 +1,23 @@
 package kz.kd.practice
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 
 const val EXTRA_COUNTER = "EXTRA_COUNTER"
+const val EXTRA_IS_RESET = "EXTRA_IS_RESET"
 private const val KEY_COUNTER = "KEY_COUNTER"
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var resultActivityResult: ActivityResultLauncher<Intent>
+    private lateinit var counterTextView: TextView
     private var currentCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val plusButton: Button = findViewById(R.id.plusButton)
-        val counterTextView: TextView = findViewById(R.id.counterTextView)
+        counterTextView = findViewById(R.id.counterTextView)
 
         counterTextView.text = currentCounter.toString()
 
@@ -32,20 +38,28 @@ class MainActivity : AppCompatActivity() {
             counterTextView.text = currentCounter.toString()
         }
 
+        resultActivityResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                Toast.makeText(this, "result is achieved", Toast.LENGTH_SHORT).show()
+                val isReset = it.data?.getBooleanExtra(EXTRA_IS_RESET, false) ?: false
+                if (isReset) {
+                    currentCounter = 0
+                    counterTextView.text = currentCounter.toString()
+                }
+            }
+        }
+
         val resultButton: Button = findViewById(R.id.resultButton)
         resultButton.setOnClickListener {
             Intent(this, ResultActivity::class.java).apply {
                 putExtra(EXTRA_COUNTER, currentCounter)
-                startActivity(this)
+                resultActivityResult.launch(this)
             }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-
-        Log.d("MainActivity", "onSaveInstanceState() is called")
-
         outState.putInt(KEY_COUNTER, currentCounter)
     }
 }
