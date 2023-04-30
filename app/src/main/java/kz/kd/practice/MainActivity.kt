@@ -2,48 +2,35 @@ package kz.kd.practice
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
+
+private const val ONBOARD_SHOWN_KEY = "key_onboard_show"
 
 class MainActivity : AppCompatActivity() {
 
-    private var preferences: SharedPreferences? = null
-    private var listener: SharedPreferences.OnSharedPreferenceChangeListener? = null
+    private lateinit var preferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            Log.d("listener", key)
-            Toast.makeText(this, sharedPreferences.getString(key, "listener"), Toast.LENGTH_SHORT)
-                .show()
-        }
-        preferences?.registerOnSharedPreferenceChangeListener(listener)
+        preferences = getSharedPreferences(BuildConfig.APPLICATION_ID, MODE_PRIVATE)
+        val isOnboardShown = preferences.getBoolean(ONBOARD_SHOWN_KEY, false)
 
         val tvValue: TextView = findViewById(R.id.tv_value)
-        val tvValue2: TextView = findViewById(R.id.tv_value_2)
-
-        preferences?.edit()?.putInt("key", 1)?.apply()
-        preferences?.edit()?.putString("key2", null)?.apply()
-
-        tvValue.text = preferences?.getInt("key", 0).toString()
-        tvValue.setOnClickListener {
-            tvValue2.text = preferences?.getString("key2", "String Parse")
+        tvValue.text = if (isOnboardShown) {
+            "Hello User"
+        } else {
+            "Hello Stranger"
         }
 
-//        preferences?.getString("key", "defValue")
-//        preferences?.getBoolean("key", false)
-//        preferences?.getFloat("key", 0f)
-//        preferences?.getInt("key", 0)
-//        preferences?.getStringSet("key", arraySetOf("def", "value"))
-    }
-
-    override fun onDestroy() {
-        preferences?.unregisterOnSharedPreferenceChangeListener(listener)
-        super.onDestroy()
+        val tvValue2: TextView = findViewById(R.id.tv_value_2)
+        tvValue2.setOnClickListener {
+            preferences
+                .edit()
+                .putBoolean(ONBOARD_SHOWN_KEY, true)
+                .apply()
+        }
     }
 }
