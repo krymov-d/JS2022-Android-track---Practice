@@ -17,10 +17,13 @@ import kz.kd.practice.diffutil.Sample
 import kz.kd.practice.diffutil.SampleAdapter
 
 private const val TAG = "RecyclerView_II"
+private const val KEY_POSITION = "KEY_POSITION"
+private const val KEY_OFFSET = "KEY_OFFSET"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvMain: RecyclerView
+    private lateinit var layoutManagerMain: LinearLayoutManager
     private lateinit var btnUpdate: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,18 +31,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         rvMain = findViewById(R.id.recycler_view)
+        layoutManagerMain = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         btnUpdate = findViewById(R.id.btn_update)
 
-        setupSampleAdapter()
+        setupAnimalAdapter()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val firstItemPosition = layoutManagerMain.findFirstVisibleItemPosition()
+        val top = layoutManagerMain.findViewByPosition(firstItemPosition)?.top ?: 0
+        outState.putInt(KEY_POSITION, firstItemPosition)
+        outState.putInt(KEY_OFFSET, top)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val firstItemPosition = savedInstanceState.getInt(KEY_POSITION)
+        val top = savedInstanceState.getInt(KEY_OFFSET)
+//        layoutManagerMain.scrollToPosition(firstItemPosition)
+        layoutManagerMain.scrollToPositionWithOffset(firstItemPosition, top)
     }
 
     private fun setupSampleAdapter() {
         val sampleAdapter = SampleAdapter()
-        val sampleManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         rvMain.apply {
             adapter = sampleAdapter
-            layoutManager = sampleManager
+            layoutManager = layoutManagerMain
         }
 
         val sampleList = mutableListOf<Sample>()
@@ -68,11 +87,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d("cat name:", it.toString())
             }
         )
-        val animalManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         rvMain.apply {
             adapter = animalAdapter
-            layoutManager = animalManager
+            layoutManager = layoutManagerMain
         }
 
         val animalList = mutableListOf<Animal>()
@@ -85,52 +103,9 @@ class MainActivity : AppCompatActivity() {
 
         animalAdapter.setItems(animalList)
 
-        //LayoutManager
-        var position: Int = 0
-        animalManager.scrollToPosition(40)
-        position = animalManager.findFirstVisibleItemPosition()
-        Log.d(TAG, position.toString())
-        position = animalManager.findFirstCompletelyVisibleItemPosition()
-        Log.d(TAG, position.toString())
-        position = animalManager.findLastVisibleItemPosition()
-        Log.d(TAG, position.toString())
-        position = animalManager.findLastCompletelyVisibleItemPosition()
-        Log.d(TAG, position.toString())
-
-
-        //ItemAnimator
-        rvMain.itemAnimator = DefaultItemAnimator() // по умолчанию (можно не писать)
-        rvMain.itemAnimator = null // отключаем анимацию
-
-
-        //OnScrollListener
-        val scrollListener = object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                Log.d(TAG, newState.toString())
-            }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                Log.d(TAG, "dx = $dx, dy = $dy")
-            }
-        }
-        rvMain.addOnScrollListener(scrollListener)
-
-        //SmoothScroller
-        val smoothScroller = object : LinearSmoothScroller(this) {
-            override fun getVerticalSnapPreference(): Int {
-                return SNAP_TO_END
-            }
-        }
-        smoothScroller.targetPosition = 90
-        animalManager.startSmoothScroll(smoothScroller)
-
         //ItemDecoration
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         rvMain.addItemDecoration(dividerItemDecoration)
-
-        //Scrollbars
-        rvMain.isVerticalScrollBarEnabled = true
-        rvMain.isHorizontalScrollBarEnabled = true
     }
 
     private fun setupSimpleAdapter() {
@@ -141,11 +116,9 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        val nameManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-
         rvMain.apply {
             adapter = nameAdapter
-            layoutManager = nameManager
+            layoutManager = layoutManagerMain
         }
 
         val nameList = listOf("Арман", "Игорь", "Daniel", "Айсұлу")
