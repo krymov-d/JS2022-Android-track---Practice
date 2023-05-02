@@ -6,6 +6,11 @@ import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.DOWN
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +22,6 @@ import kz.kd.practice.diffutil.Sample
 import kz.kd.practice.diffutil.SampleAdapter
 
 private const val TAG = "RecyclerView_II"
-private const val KEY_POSITION = "KEY_POSITION"
-private const val KEY_OFFSET = "KEY_OFFSET"
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,50 +38,6 @@ class MainActivity : AppCompatActivity() {
         btnUpdate = findViewById(R.id.btn_update)
 
         setupAnimalAdapter()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        val firstItemPosition = layoutManagerMain.findFirstVisibleItemPosition()
-        val top = layoutManagerMain.findViewByPosition(firstItemPosition)?.top ?: 0
-        outState.putInt(KEY_POSITION, firstItemPosition)
-        outState.putInt(KEY_OFFSET, top)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        val firstItemPosition = savedInstanceState.getInt(KEY_POSITION)
-        val top = savedInstanceState.getInt(KEY_OFFSET)
-//        layoutManagerMain.scrollToPosition(firstItemPosition)
-        layoutManagerMain.scrollToPositionWithOffset(firstItemPosition, top)
-    }
-
-    private fun setupSampleAdapter() {
-        val sampleAdapter = SampleAdapter()
-
-        rvMain.apply {
-            adapter = sampleAdapter
-            layoutManager = layoutManagerMain
-        }
-
-        val sampleList = mutableListOf<Sample>()
-        for (i in 0..50) {
-            val sample = Sample(id = i, name = "Sample $i")
-            sampleList.add(sample)
-        }
-        sampleAdapter.setData(sampleList)
-
-        btnUpdate.setOnClickListener {
-            val updatedSampleList = mutableListOf<Sample>()
-            for (i in 0..50) {
-                if (i % 2 == 0) {
-                    continue
-                }
-                val sample = Sample(id = i, name = "Sample $i")
-                updatedSampleList.add(sample)
-            }
-            sampleAdapter.updateData(updatedSampleList)
-        }
     }
 
     private fun setupAnimalAdapter() {
@@ -106,22 +65,24 @@ class MainActivity : AppCompatActivity() {
         //ItemDecoration
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         rvMain.addItemDecoration(dividerItemDecoration)
-    }
 
-    private fun setupSimpleAdapter() {
+        //ItemTouchHelper
+        val itemTouchHelperCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, START or END) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return true
+                }
 
-        val nameAdapter = NameAdapter(
-            clickListener = {
-                Log.d("name", it)
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    return
+                }
+
             }
-        )
-
-        rvMain.apply {
-            adapter = nameAdapter
-            layoutManager = layoutManagerMain
-        }
-
-        val nameList = listOf("Арман", "Игорь", "Daniel", "Айсұлу")
-        nameAdapter.setItems(nameList)
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(rvMain)
     }
 }
