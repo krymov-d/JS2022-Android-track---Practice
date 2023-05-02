@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        style="@style/TextViewMobileOSStyle"
+        style="@style/TextViewOSStyle.TextViewMobileOSStyle"
         android:text="@string/android_os"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.2" />
 
     <TextView
-        style="@style/TextViewOSStyle.TextViewTabletOSStyle"
+        style="@style/TextViewOSStyle"
         android:text="@string/windows"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        style="@style/TextViewMobileOSStyle"
+        style="@style/TextViewOSStyle.TextViewMobileOSStyle"
         android:text="@string/ios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
