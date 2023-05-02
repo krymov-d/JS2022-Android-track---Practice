@@ -6,4 +6,5 @@
     <string name="windows">Windows</string>
     <string name="ios">iOS</string>
     <string name="ubuntu">Ubuntu</string>
+    <string name="main_text_color">Main Text Color</string>
 </resources>
