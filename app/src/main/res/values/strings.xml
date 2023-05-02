@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
+    <string name="android_os">Android OS</string>
+    <string name="mac_os">Mac OS</string>
+    <string name="windows">Windows</string>
+    <string name="ios">iOS</string>
+    <string name="ubuntu">Ubuntu</string>
 </resources>
