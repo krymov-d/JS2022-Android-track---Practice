@@ -3,27 +3,63 @@ package kz.kd.practice
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import kz.kd.practice.customization.Animal
+import kz.kd.practice.customization.AnimalAdapter
+import kz.kd.practice.customization.Cat
+import kz.kd.practice.customization.Dog
+import kz.kd.practice.diffutil.Sample
+import kz.kd.practice.diffutil.SampleAdapter
 
 private const val TAG = "RecyclerView_II"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvMain: RecyclerView
+    private lateinit var btnUpdate: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         rvMain = findViewById(R.id.recycler_view)
+        btnUpdate = findViewById(R.id.btn_update)
 
-        setupAnimalAdapter()
+        setupSampleAdapter()
+    }
+
+    private fun setupSampleAdapter() {
+        val sampleAdapter = SampleAdapter()
+        val sampleManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        rvMain.apply {
+            adapter = sampleAdapter
+            layoutManager = sampleManager
+        }
+
+        val sampleList = mutableListOf<Sample>()
+        for (i in 0..50) {
+            val sample = Sample(id = i, name = "Sample $i")
+            sampleList.add(sample)
+        }
+        sampleAdapter.setData(sampleList)
+
+        btnUpdate.setOnClickListener {
+            val updatedSampleList = mutableListOf<Sample>()
+            for (i in 0..50) {
+                if (i % 2 == 0) {
+                    continue
+                }
+                val sample = Sample(id = i, name = "Sample $i")
+                updatedSampleList.add(sample)
+            }
+            sampleAdapter.updateData(updatedSampleList)
+        }
     }
 
     private fun setupAnimalAdapter() {

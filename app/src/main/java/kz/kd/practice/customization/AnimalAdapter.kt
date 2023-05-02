@@ -1,8 +1,9 @@
-package kz.kd.practice
+package kz.kd.practice.customization
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kz.kd.practice.R
 
 class AnimalAdapter(
     private val clickListener: (animal: Animal) -> Unit

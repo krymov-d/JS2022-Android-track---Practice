@@ -1,8 +1,8 @@
-package kz.kd.practice
+package kz.kd.practice.customization
 
 import androidx.annotation.DrawableRes
 
-data class Dog(
+data class Cat(
     val name: String,
     @DrawableRes val imageRes: Int
 ): Animal
