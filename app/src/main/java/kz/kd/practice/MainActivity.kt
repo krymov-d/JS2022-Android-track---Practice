@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPopupMenu: Button
     private lateinit var btnSubMenuActivity: Button
     private lateinit var btnGroupMenuActivity: Button
+    private lateinit var btnNavigationDrawerActivity: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         initPopupMenu()
         initSubMenuActivity()
         initGroupActivity()
+        initNavigationDrawerActivity()
     }
 
     private fun initToolbar() {
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         btnPopupMenu = findViewById(R.id.btn_popup_menu)
         btnSubMenuActivity = findViewById(R.id.btn_submenu_activity)
         btnGroupMenuActivity = findViewById(R.id.btn_group_menu_activity)
+        btnNavigationDrawerActivity = findViewById(R.id.btn_navigation_drawer_activity)
     }
 
     private fun initSecondActivity() {
@@ -94,6 +97,14 @@ class MainActivity : AppCompatActivity() {
     private fun initGroupActivity() {
         btnGroupMenuActivity.setOnClickListener {
             Intent(this, MenuGroupActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+    }
+
+    private fun initNavigationDrawerActivity() {
+        btnNavigationDrawerActivity.setOnClickListener {
+            Intent(this, DrawerActivity::class.java).also {
                 startActivity(it)
             }
         }

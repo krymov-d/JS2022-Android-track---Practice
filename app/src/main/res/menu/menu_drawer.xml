@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_head"
+        android:title="@string/profile">
+        <menu>
+            <item
+                android:id="@+id/menu_add"
+                android:checkable="true"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="@string/add" />
+            <item
+                android:id="@+id/menu_delete"
+                android:checkable="true"
+                android:icon="@android:drawable/ic_menu_delete"
+                android:title="@string/delete" />
+            <item
+                android:id="@+id/menu_also"
+                android:checkable="true"
+                android:icon="@android:drawable/ic_menu_more"
+                android:title="@string/more_2" />
+        </menu>
+    </item>
+
+    <item android:title="@string/setting">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:checked="true"
+                    android:icon="@android:drawable/ic_menu_camera"
+                    android:title="@string/camera" />
+                <item
+                    android:icon="@android:drawable/ic_menu_help"
+                    android:title="@string/help" />
+            </group>
+        </menu>
+    </item>
+</menu>
