@@ -8,13 +8,17 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnMain: Button
+    private lateinit var btnSecondActivity: Button
+    private lateinit var btnContextMenu: Button
+    private lateinit var btnPopupMenu: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         initViews()
         initSecondActivity()
         initContextMenu()
-
+        initPopupMenu()
     }
 
     private fun initToolbar() {
@@ -32,11 +36,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        btnMain = findViewById(R.id.btn_main)
+        btnSecondActivity = findViewById(R.id.btn_second_activity)
+        btnContextMenu = findViewById(R.id.btn_context_menu)
+        btnPopupMenu = findViewById(R.id.btn_popup_menu)
     }
 
     private fun initSecondActivity() {
-        btnMain.setOnClickListener {
+        btnSecondActivity.setOnClickListener {
             Intent(this, SecondActivity::class.java).also {
                 startActivity(it)
             }
@@ -44,7 +50,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initContextMenu() {
-        registerForContextMenu(btnMain)
+        registerForContextMenu(btnContextMenu)
+    }
+
+    private fun initPopupMenu() {
+        btnPopupMenu.setOnClickListener {
+            val popup = PopupMenu(this, it)
+            val inflater: MenuInflater = popup.menuInflater
+            inflater.inflate(R.menu.menu_main, popup.menu)
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu_close -> {
+                        Toast.makeText(this, "Close", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    R.id.menu_more -> {
+                        Toast.makeText(this, "More", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+            popup.show()
+        }
     }
 
     override fun onCreateContextMenu(
