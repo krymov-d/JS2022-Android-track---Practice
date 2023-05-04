@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/settings">
+        <menu>
+            <item
+                android:id="@+id/menu_login"
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="@string/login"
+                app:showAsAction="ifRoom" />
+            <item
+                android:id="@+id/menu_password"
+                android:icon="@android:drawable/ic_media_pause"
+                android:title="@string/password"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_read"
+        android:title="@string/read">
+        <menu>
+            <item
+                android:id="@+id/menu_read_news"
+                android:title="@string/news" />
+            <item
+                android:id="@+id/menu_read_other"
+                android:title="@string/other" />
+        </menu>
+    </item>
+</menu>

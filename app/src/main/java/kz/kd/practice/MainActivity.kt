@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSecondActivity: Button
     private lateinit var btnContextMenu: Button
     private lateinit var btnPopupMenu: Button
+    private lateinit var btnSubMenuActivity: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         initSecondActivity()
         initContextMenu()
         initPopupMenu()
+        initSubMenuActivity()
     }
 
     private fun initToolbar() {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         btnSecondActivity = findViewById(R.id.btn_second_activity)
         btnContextMenu = findViewById(R.id.btn_context_menu)
         btnPopupMenu = findViewById(R.id.btn_popup_menu)
+        btnSubMenuActivity = findViewById(R.id.btn_submenu_activity)
     }
 
     private fun initSecondActivity() {
@@ -74,6 +77,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             popup.show()
+        }
+    }
+
+    private fun initSubMenuActivity() {
+        btnSubMenuActivity.setOnClickListener {
+            Intent(this, SubMenuActivity::class.java).also {
+                startActivity(it)
+            }
         }
     }
 

@@ -28,6 +28,7 @@
                 android:value="" />
         </activity>
         <activity android:name="kz.kd.practice.SecondActivity" />
+        <activity android:name="kz.kd.practice.SubMenuActivity" />
     </application>
 
 </manifest>
