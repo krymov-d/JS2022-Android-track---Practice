@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <!--Does not work color-->
+    <style name="TitleTextStyle">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubtitleTextStyle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+</resources>

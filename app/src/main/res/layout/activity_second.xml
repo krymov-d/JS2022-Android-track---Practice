@@ -17,7 +17,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0"
-        app:title="Second Activity" />
+        app:logo="@android:drawable/ic_menu_edit"
+        app:navigationIcon="@android:drawable/ic_delete"
+        app:subtitle="This is subtitle"
+        app:subtitleTextAppearance="@style/SubtitleTextStyle"
+        app:title="Second Activity"
+        app:titleTextAppearance="@style/TitleTextStyle" />
 
     <TextView
         android:layout_width="wrap_content"
