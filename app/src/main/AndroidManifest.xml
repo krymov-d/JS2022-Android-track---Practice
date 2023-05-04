@@ -29,6 +29,7 @@
         </activity>
         <activity android:name="kz.kd.practice.SecondActivity" />
         <activity android:name="kz.kd.practice.SubMenuActivity" />
+        <activity android:name="kz.kd.practice.MenuGroupActivity" />
     </application>
 
 </manifest>
