@@ -27,4 +27,6 @@
     <string name="camera">Камера</string>
     <string name="help">Помощь</string>
     <string name="header">Это наш хедер</string>
+    <string name="nav_opened">Open Nav Drawer</string>
+    <string name="nav_closed">Close Nav Drawer</string>
 </resources>
