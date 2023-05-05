@@ -9,4 +9,5 @@
     <string name="single_choice">Single Choice</string>
     <string name="btn_close">Закрыть</string>
     <string name="alert_dialog_with_custom_layout">Alert dialog With Custom Layout</string>
+    <string name="dialog_fragment">Dialog Fragment</string>
 </resources>

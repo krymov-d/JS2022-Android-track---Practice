@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMultipleChoice: Button
     private lateinit var btnSingleChoice: Button
     private lateinit var btnCustomDialog: Button
+    private lateinit var btnDialogFragment: Button
 
     private val students = arrayOf(
         "Student A",
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         btnMultipleChoice = findViewById(R.id.btn_alert_dialog_multiple_choice)
         btnSingleChoice = findViewById(R.id.btn_alert_dialog_single_choice)
         btnCustomDialog = findViewById(R.id.btn_alert_dialog_custom)
+        btnDialogFragment = findViewById(R.id.btn_dialog_fragment)
     }
 
     private fun initClickListeners() {
@@ -152,6 +154,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             dialog.show()
+        }
+
+        btnDialogFragment.setOnClickListener {
+            FirstDialogFragment().show(supportFragmentManager, null)
         }
     }
 }
