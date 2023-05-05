@@ -3,4 +3,5 @@
     <string name="app_name_custom">Practice App</string>
     <string name="date_picker">Date Picker</string>
     <string name="time_picker">Time Picker</string>
+    <string name="simple_alert_dialog">Simple Alert Dialog</string>
 </resources>
