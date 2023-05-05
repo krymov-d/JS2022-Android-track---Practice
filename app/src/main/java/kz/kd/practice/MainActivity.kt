@@ -4,7 +4,9 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.time.Duration.Companion.hours
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAlertDialogWithList: Button
     private lateinit var btnMultipleChoice: Button
     private lateinit var btnSingleChoice: Button
+    private lateinit var btnCustomDialog: Button
 
     private val students = arrayOf(
         "Student A",
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         btnAlertDialogWithList = findViewById(R.id.btn_alert_dialog_with_list)
         btnMultipleChoice = findViewById(R.id.btn_alert_dialog_multiple_choice)
         btnSingleChoice = findViewById(R.id.btn_alert_dialog_single_choice)
+        btnCustomDialog = findViewById(R.id.btn_alert_dialog_custom)
     }
 
     private fun initClickListeners() {
@@ -133,6 +137,21 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }.show()
+        }
+
+        btnCustomDialog.setOnClickListener {
+            val customView: View = layoutInflater.inflate(R.layout.dialog_custom, null, false)
+            val dialog = AlertDialog.Builder(this).apply {
+                setView(customView)
+            }.create()
+            with(customView) {
+                findViewById<TextView>(R.id.title).text = "Custom Title"
+                findViewById<TextView>(R.id.subtitle).text = "Custom SubTitle"
+                findViewById<Button>(R.id.closeButton).setOnClickListener {
+                    dialog.dismiss()
+                }
+            }
+            dialog.show()
         }
     }
 }
