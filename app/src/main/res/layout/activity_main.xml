@@ -29,7 +29,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <Button
-        android:id="@+id/btn_simpleAlertDialog"
+        android:id="@+id/btn_alert_dialog_simple"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/simple_alert_dialog"
@@ -38,5 +38,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/btn_alert_dialog_with_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alert_dialog_with_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
