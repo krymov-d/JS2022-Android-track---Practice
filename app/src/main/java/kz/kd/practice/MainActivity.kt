@@ -6,9 +6,11 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.add
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 
@@ -22,6 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSingleChoice: Button
     private lateinit var btnCustomDialog: Button
     private lateinit var btnDialogFragment: Button
+    private lateinit var btnDialogFragment2: Button
+
+    private lateinit var flContainer: FrameLayout
 
     private val students = arrayOf(
         "Student A",
@@ -52,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         btnSingleChoice = findViewById(R.id.btn_alert_dialog_single_choice)
         btnCustomDialog = findViewById(R.id.btn_alert_dialog_custom)
         btnDialogFragment = findViewById(R.id.btn_dialog_fragment)
+        btnDialogFragment2 = findViewById(R.id.btn_dialog_fragment_2)
+        flContainer = findViewById(R.id.fragmentContainer)
     }
 
     private fun initClickListeners() {
@@ -158,6 +165,11 @@ class MainActivity : AppCompatActivity() {
 
         btnDialogFragment.setOnClickListener {
             FirstDialogFragment().show(supportFragmentManager, null)
+        }
+
+        btnDialogFragment2.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragmentContainer, SecondDialogFragment(), null).commit()
         }
     }
 }
