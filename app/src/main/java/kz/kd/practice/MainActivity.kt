@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var flContainer: FrameLayout
 
+    private lateinit var dialog: SecondDialogFragment
+
     private val students = arrayOf(
         "Student A",
         "Student B",
@@ -168,8 +170,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnDialogFragment2.setOnClickListener {
+            val listener = object : OnButtonClicked {
+                override fun onButtonClickedOnce() {
+                    dialog.dismiss()
+                }
+            }
+            dialog = SecondDialogFragment(listener = listener)
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragmentContainer, SecondDialogFragment(), null).commit()
+                .add(R.id.fragmentContainer, dialog, null).commit()
         }
     }
 }

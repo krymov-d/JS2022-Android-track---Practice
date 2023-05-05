@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
-class SecondDialogFragment : DialogFragment() {
+class SecondDialogFragment(private val listener: OnButtonClicked) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class SecondDialogFragment : DialogFragment() {
             findViewById<TextView>(R.id.title).text = "Custom Title"
             findViewById<TextView>(R.id.subtitle).text = "Custom Subtitle"
             findViewById<Button>(R.id.closeButton).setOnClickListener {
-                dismiss()
+                listener.onButtonClickedOnce()
             }
         }
 
