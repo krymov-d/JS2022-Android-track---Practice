@@ -16,6 +16,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnTimePicker: Button
     private lateinit var btnSimpleAlertDialog: Button
     private lateinit var btnAlertDialogWithList: Button
+    private lateinit var btnMultipleChoice: Button
+
+
+    private val students = arrayOf(
+        "Student A",
+        "Student B",
+        "Student C",
+        "Student D",
+        "Student E",
+        "Student F",
+        "Student G",
+        "Student H"
+    )
+    private val studentsState = booleanArrayOf(true, false, true, false, true, false, false, false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         btnTimePicker = findViewById(R.id.btn_time_picker)
         btnSimpleAlertDialog = findViewById(R.id.btn_alert_dialog_simple)
         btnAlertDialogWithList = findViewById(R.id.btn_alert_dialog_with_list)
+        btnMultipleChoice = findViewById(R.id.btn_alert_dialog_multiple_choice)
     }
 
     private fun initClickListeners() {
@@ -80,22 +96,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnAlertDialogWithList.setOnClickListener {
-            val students = arrayOf(
-                "Student A",
-                "Student B",
-                "Student C",
-                "Student D",
-                "Student E",
-                "Student F",
-                "Student G",
-                "Student H"
-            )
             AlertDialog.Builder(this).apply {
                 setTitle("List of students")
                 setItems(students) { _, itemIndex ->
                     Toast.makeText(
                         this@MainActivity,
                         "${students[itemIndex]} is pressed",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }.show()
+        }
+
+        btnMultipleChoice.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle("List of students")
+                setMultiChoiceItems(students, studentsState) { _, itemIndex, itemState ->
+                    Toast.makeText(
+                        this@MainActivity,
+                        "${students[itemIndex]} is checked $itemState",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
