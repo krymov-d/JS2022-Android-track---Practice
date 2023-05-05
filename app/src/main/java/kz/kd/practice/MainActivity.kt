@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnSimpleAlertDialog: Button
     private lateinit var btnAlertDialogWithList: Button
     private lateinit var btnMultipleChoice: Button
-
+    private lateinit var btnSingleChoice: Button
 
     private val students = arrayOf(
         "Student A",
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         btnSimpleAlertDialog = findViewById(R.id.btn_alert_dialog_simple)
         btnAlertDialogWithList = findViewById(R.id.btn_alert_dialog_with_list)
         btnMultipleChoice = findViewById(R.id.btn_alert_dialog_multiple_choice)
+        btnSingleChoice = findViewById(R.id.btn_alert_dialog_single_choice)
     }
 
     private fun initClickListeners() {
@@ -115,6 +116,19 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@MainActivity,
                         "${students[itemIndex]} is checked $itemState",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }.show()
+        }
+
+        btnSingleChoice.setOnClickListener {
+            AlertDialog.Builder(this).apply {
+                setTitle("List of students")
+                setSingleChoiceItems(students, 0) { _, checkedIndex ->
+                    Toast.makeText(
+                        this@MainActivity,
+                        "${students[checkedIndex]} is checked",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
