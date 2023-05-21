@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnEmptyBS: AppCompatButton
     private lateinit var btnStandardBS: AppCompatButton
+    private lateinit var btnModalBS: AppCompatButton
     private lateinit var coordinatorLayout: CoordinatorLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         btnEmptyBS = findViewById(R.id.button)
         btnStandardBS = findViewById(R.id.button2)
+        btnModalBS = findViewById(R.id.button3)
         coordinatorLayout = findViewById(R.id.stickerCoordinatorLayout)
 
         btnEmptyBS.setOnClickListener {
@@ -26,6 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         btnStandardBS.setOnClickListener {
             coordinatorLayout.isGone = !coordinatorLayout.isGone
+        }
+
+        btnModalBS.setOnClickListener {
+            BottomSheetModal().show(supportFragmentManager, null)
         }
 
     }

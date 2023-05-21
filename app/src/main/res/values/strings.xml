@@ -6,4 +6,5 @@
     <string name="action">Action</string>
     <string name="empty_bottom_sheet">Empty Bottom Sheet</string>
     <string name="standard_bottom_sheet">Standard Bottom Sheet</string>
+    <string name="modal_bottom_sheet">Modal Bottom Sheet</string>
 </resources>
