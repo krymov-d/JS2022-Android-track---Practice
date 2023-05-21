@@ -1,5 +1,6 @@
 package kz.kd.practice
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnStandardBS: AppCompatButton
     private lateinit var btnModalBS: AppCompatButton
     private lateinit var btnExpandingBS: AppCompatButton
+    private lateinit var btnChipsActivity: AppCompatButton
     private lateinit var coordinatorLayout: CoordinatorLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         btnStandardBS = findViewById(R.id.button2)
         btnModalBS = findViewById(R.id.button3)
         btnExpandingBS = findViewById(R.id.button4)
+        btnChipsActivity = findViewById(R.id.button5)
         coordinatorLayout = findViewById(R.id.stickerCoordinatorLayout)
 
         btnEmptyBS.setOnClickListener {
@@ -38,6 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         btnExpandingBS.setOnClickListener {
             ExpandingSheetDialog().show(supportFragmentManager, null)
+        }
+
+        btnChipsActivity.setOnClickListener {
+            Intent(this, ChipsActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 }

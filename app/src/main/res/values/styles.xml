@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <style name="ChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/background_chip</item>
+        <item name="chipStrokeColor">#333FA6</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">#0E1023</item>
+        <item name="chipStartPadding">8dp</item>
+        <item name="chipEndPadding">8dp</item>
+    </style>
+</resources>

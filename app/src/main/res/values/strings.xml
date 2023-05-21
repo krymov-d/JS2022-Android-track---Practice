@@ -7,4 +7,9 @@
     <string name="empty_bottom_sheet">Empty Bottom Sheet</string>
     <string name="standard_bottom_sheet">Standard Bottom Sheet</string>
     <string name="modal_bottom_sheet">Modal Bottom Sheet</string>
+    <string name="first_item">First item</string>
+    <string name="second_item">Second item</string>
+    <string name="third_item">Third item</string>
+    <string name="expanding_bottom_sheet">Expanding Bottom Sheet</string>
+    <string name="chips_activity">Chips Activity</string>
 </resources>
