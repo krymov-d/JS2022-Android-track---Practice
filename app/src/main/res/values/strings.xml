@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
+    <string name="title">Title</string>
+    <string name="supporting_text">Supporting Text</string>
+    <string name="action">Action</string>
+    <string name="empty_bottom_sheet">Empty Bottom Sheet</string>
+    <string name="standard_bottom_sheet">Standard Bottom Sheet</string>
 </resources>
