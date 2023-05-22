@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Practice</string>
     <string name="app_name_custom">Practice App</string>
+    <string name="text">text</string>
+    <string name="tab_1">Tab 1</string>
+    <string name="tab_2">Tab 2</string>
 </resources>
